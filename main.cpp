@@ -509,5 +509,6 @@ int main(int argc, char* argv[]) {
         std::cout << "\nend" << std::endl;
     }
 
-
+    std::cout << "enter a valid argument" << std::endl;
+    return -1;
 }
