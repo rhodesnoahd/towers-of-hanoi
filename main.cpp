@@ -1,9 +1,5 @@
-/** Noah Rhodes Hanoi study 
- * collection of functions which solve various Hanoi graph examples */
+/** Noah Rhodes Hanoi study */
 #include <iostream>
-
-
-
 
 /** procedure Hanoi solves the towers of Hanoi game for the following graph:
  * G(V,E) where V={S,A,D} & E={(S,A), (A,S), (A,D), (D,A), (S,D), (D,S)} 
@@ -359,117 +355,159 @@ void HanoiFinal_H2(int n, const std::string& start, const std::string& auxiliary
 
 
 // tests for each solution confirm correctness of each algorithm
-int main() {
+// TODO add argument parsing to run solution for given graph
+int main(int argc, char* argv[]) {
+    if (argc <= 0)
+    {
+        std::cout << "Provide graph" << std::endl;
+        return 0;
+    }
+
     int nValues[5] = {1, 2, 3, 4, 5};
     std::string start = "S", destination = "D", auxiliary1 = "A1", auxiliary2 = "A2" ,auxiliary3 = "A3";
-    
-    
+    std::string arg = argv[1];
 
-    // Hanoi
-    // for base graph Hanoi func
-    //
-    // std::cout << "Hanoi1 solution output:\n\n";
-    // for(int& n : nValues) {
-    //     std::cout << "number of disks = " << n << "\n\n";
-    //     Hanoi(n, start, auxiliary1, destination);
-    //     std::cout << std::endl;
-    // }
-    // std::cout << std::endl;
-    // std::cout << "end Hanoi\n\n\n";
-    //
-    // end Hanoi - CORRECT
-
-
-
-    // Hanoi1
-    // for cycle of 4 vertices Hanoi1
-    //
-    // std::cout << "Hanoi1 solution output:\n\n";
-    // for(int& n : nValues) {
-    //     std::cout << "number of disks = " << n << "\n\n";
-    //     Hanoi1_H3(n, start, auxiliary1, auxiliary2, destination);
-    //     std::cout << std::endl;
-    // }
-    // std::cout << std::endl;
-    // std::cout << "end Hanoi1\n\n\n";
-    //
-    // end Hanoi1 - CORRECT
-
-
-
-    // Hanoi2
-    //
-    // for cycle of 5 vertices Hanoi2
-    // std::cout << "Hanoi2 solution output:\n\n";
-    // for(int& n : nValues) {
-    //     std::cout << "number of disks = " << n << "\n\n";
-    //     Hanoi2_H4(n, start, auxiliary1, auxiliary2, auxiliary3, destination);
-    //     std::cout << std::endl;
-    // }
-    // std::cout << std::endl;
-    //
-    // std::cout << "end Hanoi2\n\n\n";
-    // end Hanoi2 - CORRECT
-    
-
-
-    // Hanoi3
-    // for Hanoi3 Pio's final exam graph
-    //
-    // std::cout << "Hanoi3 solution output:\n\n";
-    // for(int& n : nValues) {
-    //     std::cout << "number of disks = " << n << "\n\n";
-    //     Hanoi3_H3(n, start, auxiliary1, auxiliary2, destination);
-    //     std::cout << std::endl;
-    // }
-    // std::cout << std::endl;
-    // std::cout << "end Hanoi3\n\n\n";
-    //
-    // end Hanoi3 - CORRECT
-
-
-
-    // Hanoi4
-    // for Hanoi4 2022 final exam graph
-    //
-    // std::cout << "Hanoi4 solution output:\n\n";
-    // for(int& n : nValues) {
-    //     std::cout << "number of disks = " << n << "\n\n";
-    //     Hanoi4_H1(n, start, destination, auxiliary1, auxiliary2, auxiliary3);
-    //     std::cout << std::endl;
-    // }
-    // std::cout << std::endl;
-    // std::cout << "end Hanoi4\n\n\n";
-    //
-    // end Hanoi4 - CORRECT
-
-
-
-    // Hanoi5
-    // for Hanoi5 2008 exam 1 graph
-    //
-    // std::cout << "Hanoi5 solution output:\n\n";
-    // for(int& n : nValues) {
-    //     std::cout << "number of disks = " << n << "\n\n";
-    //     Hanoi5_H1(n, start, destination, auxiliary1, auxiliary2);
-    //     std::cout << std::endl;
-    // }
-    // std::cout << std::endl;
-    // std::cout << "end Hanoi5\n\n\n";
-    //
-    // end Hanoi5 - CORRECT
-
-
-    // HanoiFinal
-    // for my final exam 2022
-    //
-    std::cout << "HanoiFinal solution output:\n\n";
-    for(int& n : nValues) {
-        std::cout << "number of disks = " << n << "\n\n";
-        HanoiFinal_H4(n, start, auxiliary1, auxiliary2, auxiliary3, destination);
-        std::cout << std::endl;
+    // base graph Hanoi
+    if (arg == "base")
+    {
+        std::cout << "/** procedure Hanoi solves the towers of Hanoi game for the following graph:\n";
+        std::cout << "* G(V,E) where V={S,A,D} & E={(S,A), (A,S), (A,D), (D,A), (S,D), (D,S)}\n";
+        std::cout << "*\n"; 
+        std::cout << "* (simplest case is fully connected)\n";
+        std::cout << "*\n"; 
+        std::cout << "*      S. --- .D\n";
+        std::cout << "*        \\   /\n";
+        std::cout << "*          .\n";
+        std::cout << "*          A\n";
+        std::cout << "*/\n";
+        std::cout << "Hanoi1 solution output:\n" << std::endl;
+        for(int& n : nValues) {
+            std::cout << "number of disks = " << n << "\n\n";
+            Hanoi(n, start, auxiliary1, destination);
+            std::cout << std::endl;
+        }
+        std::cout << "end" << std::endl;
+        return 0;
     }
-    std::cout << "end HanoiFinal\n\n\n";
-    //
-    // end Hanoi5 - CORRECT
+
+    // cycle of 4 vertices Hanoi1
+    else if (arg == "cycle-4")
+    {
+        std::cout << "/** procedures Hanoi1_H3 & Hanoi1_H2 solve the towers of Hanoi game for the following graph:\n";
+        std::cout << "* G(V,E) where V={S,A1,A2,D} & E={(S,A1), (A1,A2), (A2,D), (D,S)}\n";
+        std::cout << "*\n";      
+        std::cout << "*      S->A1->A2->D\n";
+        std::cout << "*      ^          |\n";
+        std::cout << "*      |          |\n"; 
+        std::cout << "*       ----------\n";
+        std::cout << "*/\n";
+        std::cout << "Hanoi1 solution output:\n\n";
+        for(int& n : nValues) {
+            std::cout << "number of disks = " << n << "\n\n";
+            Hanoi1_H3(n, start, auxiliary1, auxiliary2, destination);
+            std::cout << std::endl;
+        }
+        std::cout << "\nend Hanoi1" << std::endl;
+        return 0;
+    }
+    
+    // cycle of 5 vertices Hanoi2
+    else if (arg == "cycle-5")
+    {
+        std::cout << "/** procedures Hanoi2_H4, Hanoi2_H3, & Hanoi2_H2 solve the towers of Hanoi game for the following graph:\n";
+        std::cout << "* G(V,E) where V={S,A1,A2,A3,D} & E={(S,A1), (A1,A2), (A2,A3), (A3,D), (D,S)}\n";
+        std::cout << "*\n";   
+        std::cout << "*      S->A1->A2->A3->D\n";
+        std::cout << "*      ^              |\n";
+        std::cout << "*      |              |\n"; 
+        std::cout << "*       --------------\n"; 
+        std::cout << "*/\n"; 
+        std::cout << "Hanoi2 solution output:\n\n";
+        for(int& n : nValues) {
+            std::cout << "number of disks = " << n << "\n\n";
+            Hanoi2_H4(n, start, auxiliary1, auxiliary2, auxiliary3, destination);
+            std::cout << std::endl;
+        }
+        std::cout << "\nend" << std::endl;
+        return 0;
+    }
+
+    // island of 3 vertices Hanoi3
+    else if (arg == "island-3")
+    {
+        std::cout << "/** procedures Hanoi3_H3, & Hanoi3_H2 solve the towers of Hanoi game for the following graph:\n";
+        std::cout << "* G(V,E) where V={S,A1,A2,D} & E={(S,A1), (A1,S), (A1,A2), (A2,A1), (A2,D)}\n";
+        std::cout << "*\n";    
+        std::cout << "*      S<->A1<->A2->D\n";
+        std::cout << "*/\n";
+        std::cout << "Hanoi3 solution output:\n\n";
+        for(int& n : nValues) {
+            std::cout << "number of disks = " << n << "\n\n";
+            Hanoi3_H3(n, start, auxiliary1, auxiliary2, destination);
+            std::cout << std::endl;
+        }
+        std::cout << "\nend" << std::endl;
+        return 0;
+    }
+    
+    // modified cycle of 5 vertices Hanoi4
+    else if (arg == "cycle-5-mod")
+    {
+        std::cout << "/** procedures Hanoi4_H4, Hanoi4_H3, & Hanoi4_H2 solve the towers of Hanoi game for the following graph:\n";
+        std::cout << "* G(V,E) where V={S,D,A1,A2,A3} & E={(S,D) (D,A1), (A1,A2), (A2,A3), (A3,S)}\n";
+        std::cout << "*\n";    
+        std::cout << "*      S->D->A1->A2->A3\n";
+        std::cout << "*      ^              |\n";
+        std::cout << "*      |              |\n"; 
+        std::cout << "*       --------------\n"; 
+        std::cout << "*/\n";
+        std::cout << "Hanoi4 solution output:\n\n";
+        for(int& n : nValues) {
+            std::cout << "number of disks = " << n << "\n\n";
+            Hanoi4_H1(n, start, destination, auxiliary1, auxiliary2, auxiliary3);
+            std::cout << std::endl;
+        }
+        std::cout << "\nend" << std::endl;
+        return 0;
+    }
+
+    // modified cycle of 4 vertices Hanoi4
+    else if (arg == "cycle-4-mod")
+    {
+        std::cout << "/** procedures Hanoi5_H1, Hanoi5_H2, & Hanoi5_H3 solve the towers of Hanoi game for the following graph:\n";
+        std::cout << "* G(V,E) where V={S,D,A1,A2} & E={(S,D) (D,A1), (A1,A2), (A2,S)}\n";
+        std::cout << "*\n"; 
+        std::cout << "*      S->D->A1->A2\n";
+        std::cout << "*      ^          |\n";
+        std::cout << "*      |          |\n";
+        std::cout << "*       ----------\n"; 
+        std::cout << "*/\n";
+        std::cout << "Hanoi5 solution output:\n\n";
+        for(int& n : nValues) {
+            std::cout << "number of disks = " << n << "\n\n";
+            Hanoi5_H1(n, start, destination, auxiliary1, auxiliary2);
+            std::cout << std::endl;
+        }
+        std::cout << "\nend" << std::endl;
+        return 0;
+    }
+    
+    // my final exam 2022
+    else if (arg == "final")
+    {
+        std::cout << "/** procedures HanoiFinal_H4, HanoiFinal_H3, HanoiFinal_H3prime, & HanoiFinal_H2 solve the towers of Hanoi game for the following graph:\n";
+        std::cout << "* G(V,E) where V={S,A1,A2,A3,D} & E={(S,A1), (A1,A2), (A2,A1), (A2,A3), (A3,A2), (A3,D)}\n";
+        std::cout << "*\n";    
+        std::cout << "*      S->A1<->A2<->A3->D\n";
+        std::cout << "*/\n";
+        std::cout << "HanoiFinal solution output:\n\n";
+        for(int& n : nValues) {
+            std::cout << "number of disks = " << n << "\n\n";
+            HanoiFinal_H4(n, start, auxiliary1, auxiliary2, auxiliary3, destination);
+            std::cout << std::endl;
+        }
+        std::cout << "\nend" << std::endl;
+    }
+
+
 }
